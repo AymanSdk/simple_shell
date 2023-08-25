@@ -51,7 +51,7 @@ void inicialize_data(data_of_program *data, int argc, char *argv[], char **env)
 	data->input_line = NULL;
 	data->command_name = NULL;
 	data->exec_counter = 0;
-	/* define the file descriptor to be readed*/
+
 	if (argc == 1)
 		data->file_descriptor = STDIN_FILENO;
 	else
@@ -101,7 +101,7 @@ void sisifo(char *prompt, data_of_program *data)
 		if (error_code == EOF)
 		{
 			free_all_data(data);
-			exit(errno); /* if EOF is the fisrt Char of string, exit*/
+			exit(errno);
 		}
 		if (string_len >= 1)
 		{
@@ -109,7 +109,7 @@ void sisifo(char *prompt, data_of_program *data)
 			expand_variables(data);
 			tokenize(data);
 			if (data->tokens[0])
-			{ /* if a text is given to prompt, execute */
+			{
 				error_code = execute(data);
 				if (error_code != 0)
 					_print_error(error_code, data);
